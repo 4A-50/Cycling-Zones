@@ -8,13 +8,18 @@
 #include "heartrate.h"
 #include "wpkg.h"
 
-int main()
+int WinMain()
 {
     sf::RenderWindow window(sf::VideoMode(INIT_VIDEO_SIZE_X, INIT_VIDEO_SIZE_Y), "Cycling Zones", sf::Style::Default);
     window.setFramerateLimit(60);
 
     if (!ImGui::SFML::Init(window))
         return -1;
+
+    //Set The Window Icon
+    sf::Image windowIcon;
+    if (windowIcon.loadFromFile("Cycling-Zones-Icon@0.5x.png"))
+        window.setIcon(windowIcon.getSize().x, windowIcon.getSize().y, windowIcon.getPixelsPtr());
 
     //Load Any Saved User Data
     Core::ReadUserJSON();
@@ -68,6 +73,6 @@ int main()
     }
 
     ImGui::SFML::Shutdown();
-    ImGui::DestroyContext();
+
     return 0;
 }
